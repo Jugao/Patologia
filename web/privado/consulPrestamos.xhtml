@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/myTemplate.xhtml">
+            <ui:define name="top" >
+
+                <h:form style="width: 1300px;  color: #D20005; margin-top: 70px;"  title="item" >
+                    <br/>                    
+                    <p:commandButton  action="prestamos.xhtml" value=" Realizar Prestamo"></p:commandButton>
+                    <p:commandButton  action="regisCaso.xhtml" value="Registrar Caso"></p:commandButton> 
+                    <p:commandButton  action="consulCaso.xhtml" value="Consultar Caso"></p:commandButton>                 
+
+                </h:form>               
+            </ui:define>
+            <ui:define name="content">
+                <center>
+                    <br></br>
+                    <h1>
+                        LISTA DE PRESTAMOS Y SALIDAS
+                    </h1>                
+                    <br></br>               
+                    <h:form id="frm" style="width: 1300px;  appearance: window; ">
+                        <p:growl id="ger"/>
+
+                        <p:dataTable id="data" value="#{prestaBean.prestamos}"  var="pres"  style="width: 1300px; margin-top: 30px; " rows="8"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,20,100">
+                            <p:column headerText="Caso" filterBy="#{pres.caso}"  filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.caso}"/>
+                            </p:column>
+                            <p:column headerText="Bloques" filterBy="#{pres.cantBloque}"  filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.cantBloque}"/>
+                            </p:column>                            
+                            <p:column headerText="Laminas" filterBy="#{pres.cantLamina}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.cantLamina}"/>                                
+                            </p:column>
+                            <p:column headerText="Prestamo" filterBy="#{pres.fechapresta}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.fechapresta}"/>                                
+                            </p:column>  
+                            <p:column headerText="Devolucion" filterBy="#{pres.fechadev}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.fechadev}"/>
+                            </p:column>
+                            <p:column headerText="Estado" filterBy="#{pres.estado}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.estado}"/>
+                            </p:column>
+                            <p:column headerText="Ubicacion Bloque" filterBy="#{pres.ubibloque}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.ubibloque}"/>
+                            </p:column>
+                            <p:column headerText="Ubicacion Lamina" filterBy="#{pres.ubilamina}" filterMatchMode="contains">
+                                <p:outputLabel value="#{caso.ubilamina}"/>
+                            </p:column> 
+                            <p:column headerText="Responsable" filterBy="#{pres.responsable}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.responsable}"/>
+                            </p:column> 
+                            <p:column headerText="Observacion" filterBy="#{pres.observacion}" filterMatchMode="contains">
+                                <p:outputLabel value="#{pres.observacion}"/>
+                            </p:column> 
+                            <p:column headerText="">
+                                <p:commandButton   class="bu" icon="ui-icon-pencil" actionListener="#{prestaBean.leerId(pres)}" 
+                                                   oncomplete="PF('wdlDatos').show();" update=":dlDatos"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form> 
+                    <br />
+                    <img src="la.jpg"></img>
+                </center> 
+                <p:dialog header="Datos"  widgetVar="wdlDatos" id="dlDatos"  >
+                    <h:form>
+                        <p:panelGrid columns="2">
+                            <p:outputLabel for="bloques" value="Bloque:"/>
+                            <p:inputText  id="bloques" value="#{prestaBean.p.cantBloque}"/>                         
+                            <p:outputLabel for="lami" value="Lamina :"/>
+                            <p:inputText  id="lami" value="#{prestaBean.p.cantLamina}"/> 
+                            <p:outputLabel for="devo" value="Devolucion :"/>
+                            <p:inputText  id="devo" type="date" value="#{prestaBean.p.fechadev}"/>
+                            <p:outputLabel for="devo" value="Estado :"/> 
+                            <p:selectOneMenu id="console" value="#{prestaBean.p.estado}" style="width:125px">
+                                <f:selectItem itemLabel="Seleccione" itemValue="Seleccione" />
+                                <f:selectItem itemLabel="DISPONIBLE" itemValue="DISPONIBLE" />
+                                <f:selectItem itemLabel="EXTRAVIADO" itemValue="EXTRAVIADO" />                                                             
+                            </p:selectOneMenu>
+                            <p:outputLabel for="respo" value="Responsable :"/>
+                            <p:inputText  id="respo" value="#{prestaBean.p.responsable}"/>
+                            <p:outputLabel for="obser" value="Observacion :"/>
+                            <p:inputText  id="obser" value="#{prestaBean.p.observacion}"/>
+                            <p:commandButton value="Modificar" actionListener="#{prestaBean.modificar()}"
+                                             oncomplete="PF('wdlDatos').hide();" update=":frm:data"/>
+                            <p:commandButton  value="Cancelar" immediate="true"  oncomplete="PF('wdlDatos').hide();"/>
+                        </p:panelGrid>
+                    </h:form>
+
+                </p:dialog>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

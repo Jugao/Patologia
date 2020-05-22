@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/myTemplate.xhtml">
+            <ui:define name="top" >
+                 <h:form style="width: 1300px;  color: #D20005; margin-top: 70px;"  title="item" >                  
+
+                </h:form>                             
+            </ui:define>
+            <ui:define name="content">
+                <center>
+                    <h:form>  
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:submenu label="PATOLOGIA" >
+                                <p:menuitem value="Registrar Caso" action="regisCaso.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados" action="consulCaso.xhtml"  icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos" action="consulPrestamos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo" action="consulNumCaso.xhtml"  icon="pi pi-angle-double-left"/>                                                
+                            </p:submenu>
+                            <p:submenu label="CITOLOGIA" icon="pi pi-pencil"> 
+                                 <p:menuitem value="Registrar Caso" action="regisCasoCitologia.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"   action="consulCasoCitologia.xhtml"  icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso"  action="prestamosCitologias.xhtml"      icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos"    action="consulPrestamosCitologia.xhtml"     icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoCitologia"   icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                             <p:submenu label="LIQUIDOS" icon="pi pi-pencil"> 
+                                <p:menuitem value="Registrar Caso"  action="regisCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"  action="consulCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamosLiquidos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos" action="consulPrestamosLiquidos.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                            <p:submenu label="REVISIONES" icon="pi pi-pencil"> 
+                                <p:menuitem value="Registrar Caso"  action="regisCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"  action="consulCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamosRevisiones.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos" action="consulPrestamosRevisiones.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                        </p:menubar>
+                    </h:form>
+                    <br></br>
+                    <h1>
+                        CONSECUTIVO CITOLOGIA
+                    </h1>                
+                    <br></br>               
+                    <h:form id="frm" style="width: 1300px;  appearance: window; ">
+                        <p:growl id="ger"/>
+
+                        <p:dataTable id="data" value="#{casoCitologiaBean.casos2}"  var="caso"  style="width: 1300px; margin-top: 30px; " rows="50"
+                                     paginator="true"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,20,100">
+                           
+                            <p:column headerText="Caso" filterBy="#{caso.caso}"  filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.caso}"/>
+                            </p:column>                            
+                            <p:column headerText="Bloques" filterBy="#{caso.cantBloque}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.cantBloque}"/>                                
+                            </p:column>
+                            <p:column headerText="Laminas" filterBy="#{caso.cantLamina}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.cantLamina}"/>                                
+                            </p:column>
+                            <p:column headerText="Fecha" filterBy="#{caso.fecha}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.fecha}"/>                                
+                            </p:column>                            
+                            <p:column headerText="Estado" filterBy="#{caso.prestamo}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.prestamo}"/>
+                            </p:column>
+                            <p:column headerText="Ubi Bloque " filterBy="#{caso.ubibloque}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.ubibloque}"/>
+                            </p:column>
+                            <p:column headerText="Ubi Lamina" filterBy="#{caso.ubilamina}" filterMatchMode="exact">
+                                <p:outputLabel value="#{caso.ubilamina}"/>
+                            </p:column>                                                      
+                                                                                  
+                                                       
+                        </p:dataTable>
+
+                    </h:form> 
+
+                    <br />
+                    <img src="la.jpg"></img>
+                </center> 
+
+              
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

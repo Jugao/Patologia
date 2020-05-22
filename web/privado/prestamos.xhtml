@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/myTemplate.xhtml">
+            <ui:define name="top" >
+
+                <h:form style="width: 1000px;  color: #D20005; margin-top: 70px;"  title="item" >
+                    <br></br>
+                    <p:commandButton  action="regisCaso.xhtml" value="Registrar Casos"></p:commandButton>                    
+                    <p:commandButton  action="consulCaso.xhtml" value="Consultar Caso"></p:commandButton> 
+                     <p:commandButton  action="consulPrestamos.xhtml" value="Consultar prestamos"></p:commandButton> 
+                    
+                                       
+                     
+                </h:form>               
+            </ui:define>
+            <ui:define name="content">
+                <center>
+                    <br></br>
+                    <h1>
+                       PRESTAMOS Y SALIDAS
+                    </h1>                
+                    <br></br>
+
+                    <h:form id="frm" style="width: 1000px;  color: #D20005; "  title="item2" > 
+                        <p:growl id="msg" showDetail="true" sticky="false"/> 
+
+                        <p:panelGrid columns="2"  >
+
+                                                       
+                            <p:outputLabel for="Caso" value="Caso:" />
+                            <p:inputText id="Caso" value="#{prestaBean.p.caso}" />
+                            
+                            <p:outputLabel for="CantBloque" value="Cantidad Bloque:"/>
+                            <p:inputText id="CantBloque" value="#{prestaBean.p.cantBloque}"  />
+                            
+                            <p:outputLabel for="CantidadLamina" value="Cantidad Lamina"/>
+                            <p:inputText id="CantidadLamina" value="#{prestaBean.p.cantLamina}"   />
+                            
+                            <p:outputLabel for="fecha1" value="Fecha Prestamo"/>
+                            <p:inputText id="fecha1"  type="date"  value="#{prestaBean.p.fechapresta}"   />                            
+                                                        
+                             <p:outputLabel for="ubiBloque" value="Ubicacion Bloque:"/>
+                             <p:inputText id="ubiBloque" value="#{prestaBean.p.ubibloque}"  />
+                             
+                             <p:outputLabel for="ubilamina" value="Ubicacion Lamina:"/>
+                             <p:inputText id="ubilamina" value="#{prestaBean.p.ubilamina}"  />                             
+                                                         
+                              <p:outputLabel for="respon" value="Responsable"/>
+                              <p:inputText id="respon" value="#{prestaBean.p.responsable}"  />
+                              
+                              <p:outputLabel for="observa" value="Observacion"/>
+                              <p:inputText id="observa" value="#{prestaBean.p.observacion}"  />                              
+                            
+                            <p:outputLabel />
+                            <p:commandButton value="Registrar " update="frm"  actionListener="#{prestaBean.registrar()}" />
+
+                        </p:panelGrid>
+                    </h:form>
+                </center>
+                  <br></br>
+                <img src="la.jpg"></img>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

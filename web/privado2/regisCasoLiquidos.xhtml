@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template/myTemplate.xhtml">
+            <ui:define name="top" >
+                <h:form style="width: 1000px;  color: #D20005; margin-top: 70px;"  title="item" >
+                   
+                </h:form>               
+            </ui:define>
+            <ui:define name="content">
+                <center>
+                    <h:form>  
+                        <p:growl id="messages"/>
+                        <p:menubar>
+                            <p:submenu label="PATOLOGIA" >
+                                <p:menuitem value="Registrar Caso" action="regisCaso.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados" action="consulCaso.xhtml"  icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos Salidas" action="consulPrestamos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo" action="consulNumCaso.xhtml"  icon="pi pi-angle-double-left"/>                                                
+                            </p:submenu>
+                             <p:submenu label="CITOLOGIA" icon="pi pi-pencil"> 
+                                 <p:menuitem value="Registrar Caso" action="regisCasoCitologia.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"   action="consulCasoCitologia.xhtml"  icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso"  action="prestamosCitologias.xhtml"      icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos"    action="consulPrestamosCitologia.xhtml"     icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoCitologia.xhtml"   icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                            <p:submenu label="LIQUIDOS" icon="pi pi-pencil"> 
+                                <p:menuitem value="Registrar Caso"  action="regisCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"  action="consulCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamosLiquidos.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos" action="consulPrestamosLiquidos.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoLiquidos.xhtml" icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                            <p:submenu label="REVISIONES" icon="pi pi-pencil"> 
+                                <p:menuitem value="Registrar Caso"  action="regisCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Registrados"  action="consulCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/>          
+                                <p:menuitem value="Prestar Caso" action="prestamosRevisiones.xhtml"  icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Prestamos" action="consulPrestamosRevisiones.xhtml" icon="pi pi-angle-double-left"/>
+                                <p:menuitem value="Consecutivo"  action="consulNumCasoRevisiones.xhtml" icon="pi pi-angle-double-left"/> 
+                            </p:submenu>
+                        </p:menubar>
+                    </h:form>
+
+                    <br></br><br></br>
+                    <h:form id="Validar">
+                        <!--  -->
+                        <p:growl id="msg" showDetail="true" sticky="false"/>
+                      
+                        <p:messages id="msjgral" showDetail="true" autoUpdate="true" closable="true"/>
+                        <h:panelGrid columns="2" >                           
+                            <p:inputText id="Caso"     value="#{casoLiquidosBean.c.caso}"  required="true" />
+                            <p:commandButton value="Consultar" update="Validar"    actionListener="#{casoLiquidosBean.consultarCaso()}"   /> 
+                        </h:panelGrid>
+                    </h:form>
+                    <br></br><br></br><br></br>
+                    <h1>REGISTRO DE CASOS LIQUIDOS</h1> 
+                    <br></br>
+                    <h:form id="frm" style="width: 1000px;  color: #D20005; "  title="item2" > 
+
+                        <p:panelGrid columns="2"  >
+                            <p:outputLabel for="identificacion" value="Identificacion :"/>
+                            <p:inputText id="identificacion" value="#{casoLiquidosBean.c.documento}"   />
+                            <p:outputLabel for="txtNombre" value="Nombre"/>
+                            <p:inputText  id="txtNombre" value="#{casoLiquidosBean.c.nombrePaciente}" />
+                            <p:outputLabel for="Caso" value="Caso:" />
+                            <p:inputText id="Caso" value="#{casoLiquidosBean.c.caso}" required="true"/>
+                            <p:outputLabel for="CantBloque" value="Cantidad Bloque:"/>
+                            <p:inputText id="CantBloque" value="#{casoLiquidosBean.c.cantBloque}" required="true" />
+                            <p:outputLabel for="desBloque" value="Descrpcion Bloque:"/>
+                            <p:inputText id="desBloque"  value="#{casoLiquidosBean.c.desbloque}"  />
+                            <p:outputLabel for="CantidadLamina" value="Cantidad Lamina"/>
+                            <p:inputText id="CantidadLamina" value="#{casoLiquidosBean.c.cantLamina}" required="true"  />
+                            <p:outputLabel for="desLamina" value="Descrpcion Lamina"/>
+                            <p:inputText id="desLamina"  value="#{casoLiquidosBean.c.deslamina}" />                          
+                            <p:outputLabel for="UbitBloque" value="Ubicacion Bloque:"/> 
+                            <p:inputText id="UbitBloque" value="#{casoLiquidosBean.c.ubibloque}"  />
+                            <p:outputLabel for="ubiLamina" value="Ubicacion Lamina"/>
+                            <p:inputText id="ubiLamina" value="#{casoLiquidosBean.c.ubilamina}"   />
+                            <p:outputLabel />
+                            <p:commandButton value="Registrar Caso" update="frm"  actionListener="#{casoLiquidosBean.registrar()}" />                     
+                        </p:panelGrid>
+                    </h:form>
+                </center>
+                <br></br>
+                <img src="la.jpg"></img>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
